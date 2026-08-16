@@ -11,9 +11,9 @@ export default function HeroSection() {
     <section className="relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/2 w-80 h-80 bg-cyan-600/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl aurora-blob aurora-blob-1"></div>
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl aurora-blob aurora-blob-2"></div>
+        <div className="absolute bottom-1/4 left-1/2 w-80 h-80 bg-cyan-600/20 rounded-full blur-3xl aurora-blob aurora-blob-3"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto">

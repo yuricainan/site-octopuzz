@@ -67,8 +67,77 @@ export default function Layout({ children, currentPageName }) {
             border: 1px solid rgba(99, 102, 241, 0.2);
             backdrop-filter: blur(16px);
           }
+
+          /* Aurora: os blobs de fundo desfocados ganham um movimento lento */
+          .aurora-blob {
+            animation-duration: 12s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+          }
+          .aurora-blob-1 { animation-name: aurora-drift-a; }
+          .aurora-blob-2 { animation-name: aurora-drift-b; animation-duration: 14s; }
+          .aurora-blob-3 { animation-name: aurora-drift-c; animation-duration: 10s; }
+          @keyframes aurora-drift-a {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -30px) scale(1.08); }
+          }
+          @keyframes aurora-drift-b {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-35px, 25px) scale(0.94); }
+          }
+          @keyframes aurora-drift-c {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, 30px) scale(1.05); }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .aurora-blob { animation: none; }
+          }
+
+          /* Card com brilho seguindo o mouse (use junto com um onMouseMove
+             que atualiza --mx/--my em px relativos ao card) */
+          .spotlight-card {
+            position: relative;
+            overflow: hidden;
+          }
+          .spotlight-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.25s;
+            background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(139, 92, 246, 0.28), transparent 70%);
+          }
+          .spotlight-card:hover::before {
+            opacity: 1;
+          }
+          .spotlight-card > * {
+            position: relative;
+            z-index: 1;
+          }
+
+          /* Card com leve inclinação 3D ao passar o mouse (use com um
+             onMouseMove que seta transform: rotateX/rotateY inline) */
+          .tilt-card {
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+            transform-style: preserve-3d;
+          }
+
+          /* Grão sutil por cima de tudo, pra tirar a cara de gradiente liso */
+          .noise-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.045;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          }
         `}
       </style>
+
+      <div className="noise-overlay"></div>
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 glass-effect">

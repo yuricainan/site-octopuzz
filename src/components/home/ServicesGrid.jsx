@@ -6,6 +6,13 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 
+function handleSpotlightMove(e) {
+  const card = e.currentTarget;
+  const rect = card.getBoundingClientRect();
+  card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+  card.style.setProperty("--my", `${e.clientY - rect.top}px`);
+}
+
 export default function ServicesGrid({ services }) {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -18,7 +25,10 @@ export default function ServicesGrid({ services }) {
           whileHover={{ y: -5 }}
           className="h-full"
         >
-          <Card className="service-card h-full group hover:border-blue-500/40 transition-all duration-300">
+          <Card
+            className="service-card spotlight-card h-full group hover:border-blue-500/40 transition-all duration-300"
+            onMouseMove={handleSpotlightMove}
+          >
             <CardContent className="p-8 h-full flex flex-col">
               <div className="mb-6">
                 <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import CountUp from "@/components/CountUp";
 
 const stats = [
   { number: "150+", label: "Projetos Concluídos", description: "Soluções entregues com excelência" },
@@ -32,7 +33,7 @@ export default function StatsSection() {
               className="text-center p-8 glass-effect rounded-3xl hover:border-blue-500/40 transition-all duration-300"
             >
               <div className="text-5xl md:text-6xl font-bold gradient-text mb-4">
-                {stat.number}
+                <CountUp value={stat.number} />
               </div>
               <div className="text-xl font-semibold text-white mb-2">
                 {stat.label}

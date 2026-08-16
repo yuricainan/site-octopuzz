@@ -4,6 +4,18 @@ import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
+function handleTiltMove(e) {
+  const card = e.currentTarget;
+  const rect = card.getBoundingClientRect();
+  const px = (e.clientX - rect.left) / rect.width - 0.5;
+  const py = (e.clientY - rect.top) / rect.height - 0.5;
+  card.style.transform = `rotateY(${px * 10}deg) rotateX(${-py * 10}deg)`;
+}
+
+function handleTiltLeave(e) {
+  e.currentTarget.style.transform = "rotateY(0deg) rotateX(0deg)";
+}
+
 const testimonials = [
   {
     name: "Carlos Silva",
@@ -54,8 +66,13 @@ export default function TestimonialsSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
+              style={{ perspective: "800px" }}
             >
-              <Card className="service-card h-full hover:border-blue-500/40 transition-all duration-300">
+              <Card
+                className="service-card tilt-card h-full hover:border-blue-500/40 transition-all duration-300"
+                onMouseMove={handleTiltMove}
+                onMouseLeave={handleTiltLeave}
+              >
                 <CardContent className="p-8">
                   <div className="flex items-center mb-6">
                     <Quote className="h-8 w-8 text-blue-400 mr-3" />

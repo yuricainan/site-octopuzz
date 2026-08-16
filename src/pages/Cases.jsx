@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+import CountUp from "@/components/CountUp";
 
 const achievements = [
   {
@@ -67,8 +68,8 @@ export default function Cases() {
       {/* Hero Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl aurora-blob aurora-blob-1"></div>
+          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl aurora-blob aurora-blob-2"></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto text-center">
@@ -103,7 +104,7 @@ export default function Cases() {
                       <achievement.icon className="h-8 w-8 text-white" />
                     </div>
                     <div className="text-4xl font-bold gradient-text mb-2">
-                      {achievement.number}
+                      <CountUp value={achievement.number} />
                     </div>
                     <div className="text-xl font-semibold text-white mb-2">
                       {achievement.label}
