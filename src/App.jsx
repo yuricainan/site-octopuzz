@@ -22,6 +22,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LayoutWrapper currentPageName="Home"><Home /></LayoutWrapper>} />
+          <Route path="/Home" element={<LayoutWrapper currentPageName="Home"><Home /></LayoutWrapper>} />
           <Route path="/About" element={<LayoutWrapper currentPageName="About"><About /></LayoutWrapper>} />
           <Route path="/Contact" element={<LayoutWrapper currentPageName="Contact"><Contact /></LayoutWrapper>} />
           <Route path="/Services" element={<LayoutWrapper currentPageName="Services"><Services /></LayoutWrapper>} />
