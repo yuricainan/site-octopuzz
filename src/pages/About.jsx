@@ -134,7 +134,7 @@ export default function About() {
               <div className="aspect-square relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-3xl blur-3xl"></div>
                 <img
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/0f94d6b59_logo.png"
+                  src="https://supabase.octopuzz.com.br/storage/v1/object/public/site-assets/logo-icon.png"
                   alt="Octopuzz"
                   className="relative w-full h-full object-contain filter drop-shadow-2xl"
                 />

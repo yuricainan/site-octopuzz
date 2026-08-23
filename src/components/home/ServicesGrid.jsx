@@ -26,13 +26,16 @@ export default function ServicesGrid({ services }) {
           className="h-full"
         >
           <Card
-            className="service-card spotlight-card h-full group hover:border-blue-500/40 transition-all duration-300"
+            className="service-card spotlight-card status-card h-full group hover:border-blue-500/40 transition-all duration-300"
             onMouseMove={handleSpotlightMove}
           >
             <CardContent className="p-8 h-full flex flex-col">
               <div className="mb-6">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <service.icon className="h-8 w-8 text-white" />
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <service.icon className="h-8 w-8 text-white" />
+                  </div>
+                  <span className="status-pill"><span className="pip"></span>DISPONÍVEL</span>
                 </div>
                 <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-blue-400 transition-colors duration-300">
                   {service.title}

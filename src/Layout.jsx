@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Menu, X, ExternalLink } from "lucide-react";
+import { Menu, X, ExternalLink, MapPin, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -134,10 +134,148 @@ export default function Layout({ children, currentPageName }) {
             mix-blend-mode: overlay;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
           }
+
+          /* ---- Widget de automação ao vivo (hero): pipeline + terminal ---- */
+          .demo-widget {
+            background: #0d1326;
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px -30px rgba(0,0,0,0.65);
+          }
+          .demo-widget-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.7rem 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.09);
+            background: rgba(255,255,255,0.02);
+          }
+          .demo-dot { width: 9px; height: 9px; border-radius: 50%; }
+          .demo-dot.r { background: #f87171; }
+          .demo-dot.y { background: #fbbf24; }
+          .demo-dot.g { background: #34d399; }
+          .demo-widget-title {
+            margin-left: 0.5rem;
+            font-size: 0.72rem;
+            color: #565f80;
+            font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+          }
+          .demo-widget-live {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.68rem;
+            color: #34d399;
+            font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+          }
+          .demo-widget-live .pip {
+            width: 6px; height: 6px; border-radius: 50%; background: #34d399;
+            animation: demo-blink 1.4s ease-in-out infinite;
+          }
+          @keyframes demo-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+          .demo-pipeline { position: relative; padding: 1.4rem 1.6rem 1.1rem; }
+          .demo-track {
+            position: relative; height: 4px; background: rgba(255,255,255,0.09);
+            border-radius: 2px; margin: 0 26px;
+          }
+          .demo-particle {
+            position: absolute; top: 50%; width: 8px; height: 8px; margin-top: -4px;
+            border-radius: 50%; background: #22d3ee; box-shadow: 0 0 10px 2px #22d3ee;
+            animation: demo-travel 4s linear infinite; left: 0;
+          }
+          .demo-nodes { display: flex; justify-content: space-between; margin-top: -14px; }
+          .demo-node { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; width: 60px; }
+          .demo-node .ic {
+            width: 40px; height: 40px; border-radius: 12px; background: #10162a;
+            border: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center;
+            justify-content: center; animation: demo-pulse 4s ease-in-out infinite;
+          }
+          .demo-node svg { width: 18px; height: 18px; stroke: #22d3ee; }
+          .demo-node:nth-child(1) .ic { animation-delay: 0s; }
+          .demo-node:nth-child(2) .ic { animation-delay: 1s; }
+          .demo-node:nth-child(3) .ic { animation-delay: 2s; }
+          .demo-node:nth-child(4) .ic { animation-delay: 3s; }
+          @keyframes demo-pulse {
+            0%, 85%, 100% { border-color: rgba(255,255,255,0.09); box-shadow: none; }
+            8% { border-color: #6366f1; box-shadow: 0 0 0 6px rgba(99,102,241,0.15); }
+            20% { border-color: rgba(255,255,255,0.09); box-shadow: none; }
+          }
+          .demo-node span { font-size: 0.64rem; color: #565f80; text-align: center; }
+          @keyframes demo-travel {
+            0% { left: 0%; opacity: 0; } 5% { opacity: 1; } 95% { opacity: 1; } 100% { left: 100%; opacity: 0; }
+          }
+
+          .demo-term-divider { height: 1px; background: rgba(255,255,255,0.09); }
+          .demo-term-body {
+            padding: 1rem 1.2rem 1.2rem;
+            font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+            font-size: 0.79rem; line-height: 1.85; min-height: 132px;
+          }
+          .demo-term-line { display: flex; align-items: center; gap: 0.5rem; }
+          .demo-term-line .tick { color: #34d399; width: 1rem; flex-shrink: 0; opacity: 0; }
+          .demo-term-line.done .tick { opacity: 1; }
+          .demo-term-line .txt { color: #97a2c4; }
+          .demo-caret {
+            display: inline-block; width: 6px; height: 1em; background: #22d3ee;
+            margin-left: 2px; animation: demo-caret-blink 1s step-start infinite;
+            vertical-align: text-bottom;
+          }
+          @keyframes demo-caret-blink { 50% { opacity: 0; } }
+
+          @media (prefers-reduced-motion: reduce) {
+            .demo-particle, .demo-node .ic, .demo-widget-live .pip { animation: none !important; }
+          }
+
+          /* ---- Cards de serviço: linha de gradiente + selo de status ---- */
+          .status-card { position: relative; }
+          .status-card::before {
+            content: "";
+            position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, #22d3ee, #8b5cf6, transparent);
+            background-size: 200% 100%; background-position: 200% 0;
+            transition: background-position 0.6s ease;
+          }
+          .status-card:hover::before { background-position: 0% 0; }
+          .status-pill {
+            display: flex; align-items: center; gap: 0.35rem;
+            font-size: 0.62rem; color: #34d399;
+            font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+          }
+          .status-pill .pip {
+            width: 5px; height: 5px; border-radius: 50%; background: #34d399;
+            animation: demo-blink 1.6s ease-in-out infinite;
+          }
+
+          /* ---- Anel de progresso pros números ---- */
+          .ring-wrap { position: relative; width: 76px; height: 76px; }
+          .ring-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+          .ring-wrap circle { fill: none; stroke-width: 5; }
+          .ring-wrap .ring-track { stroke: rgba(255,255,255,0.09); }
+          .ring-wrap .ring-fill {
+            stroke: url(#octRingGradient); stroke-linecap: round;
+            stroke-dasharray: 208; transition: stroke-dashoffset 1.4s ease-out;
+          }
+          .ring-wrap .ring-val {
+            position: absolute; inset: 0; display: flex; align-items: center;
+            justify-content: center; font-size: 0.95rem; font-weight: 800;
+            font-variant-numeric: tabular-nums;
+          }
         `}
       </style>
 
       <div className="noise-overlay"></div>
+
+      <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
+        <defs>
+          <linearGradient id="octRingGradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#6366f1" />
+            <stop offset="100%" stopColor="#22d3ee" />
+          </linearGradient>
+        </defs>
+      </svg>
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 glass-effect">
@@ -145,9 +283,9 @@ export default function Layout({ children, currentPageName }) {
           <div className="flex justify-between items-center py-4">
             <Link to={createPageUrl("Home")} className="flex items-center">
               <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/3397027a9_LOGOPOSITIVO.png"
+                src="https://supabase.octopuzz.com.br/storage/v1/object/public/site-assets/logo.png"
                 alt="Octopuzz"
-                className="h-12 w-auto"
+                className="h-16 w-auto"
               />
             </Link>
 
@@ -244,7 +382,7 @@ export default function Layout({ children, currentPageName }) {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-2">
               <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/3397027a9_LOGOPOSITIVO.png"
+                src="https://supabase.octopuzz.com.br/storage/v1/object/public/site-assets/logo.png"
                 alt="Octopuzz"
                 className="h-12 w-auto mb-4"
               />
@@ -252,10 +390,10 @@ export default function Layout({ children, currentPageName }) {
                 Soluções tecnológicas inteligentes para transformar seu negócio.
                 Automação, IA, consultoria e desenvolvimento personalizado.
               </p>
-              <div className="mt-6">
-                <p className="text-sm text-gray-400">📍 Fortaleza - CE</p>
-                <p className="text-sm text-gray-400">📞 (85) 9 8501-1755</p>
-                <p className="text-sm text-gray-400">✉️ contato@octopuzz.com.br</p>
+              <div className="mt-6 space-y-1.5">
+                <p className="text-sm text-gray-400 flex items-center gap-2"><MapPin className="h-4 w-4 text-gray-500" />Fortaleza - CE</p>
+                <p className="text-sm text-gray-400 flex items-center gap-2"><Phone className="h-4 w-4 text-gray-500" />(85) 9 8501-1755</p>
+                <p className="text-sm text-gray-400 flex items-center gap-2"><Mail className="h-4 w-4 text-gray-500" />contato@octopuzz.com.br</p>
               </div>
             </div>
 
@@ -277,6 +415,7 @@ export default function Layout({ children, currentPageName }) {
                 <li><Link to={createPageUrl("Cases")} className="hover:text-white">Cases</Link></li>
                 <li><Link to={createPageUrl("Blog")} className="hover:text-white">Blog</Link></li>
                 <li><Link to={createPageUrl("Contact")} className="hover:text-white">Contato</Link></li>
+                <li><Link to={createPageUrl("Privacidade")} className="hover:text-white">Privacidade</Link></li>
               </ul>
             </div>
           </div>

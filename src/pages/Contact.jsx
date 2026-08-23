@@ -1,5 +1,7 @@
 
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
 import { Contact as ContactEntity } from "@/entities/Contact";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -245,6 +247,13 @@ export default function Contact() {
                             </>
                           )}
                         </Button>
+
+                        <p className="text-xs text-gray-500 text-center">
+                          Ao enviar, você concorda com nossa{" "}
+                          <Link to={createPageUrl("Privacidade")} className="text-blue-400 hover:text-blue-300">
+                            Política de Privacidade
+                          </Link>.
+                        </p>
                       </form>
                     </>
                   )}

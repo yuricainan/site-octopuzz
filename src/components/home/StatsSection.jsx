@@ -1,12 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import CountUp from "@/components/CountUp";
+import StatRing from "@/components/StatRing";
 
 const stats = [
-  { number: "150+", label: "Projetos Concluídos", description: "Soluções entregues com excelência" },
-  { number: "80+", label: "Clientes Satisfeitos", description: "Empresas que confiam em nosso trabalho" },
-  { number: "99%", label: "Taxa de Sucesso", description: "Projetos entregues dentro do prazo" },
-  { number: "24/7", label: "Suporte Disponível", description: "Atendimento quando você precisar" }
+  { number: "150+", label: "Projetos Concluídos", description: "Soluções entregues com excelência", ringPercent: 65 },
+  { number: "80+", label: "Clientes Satisfeitos", description: "Empresas que confiam em nosso trabalho", ringPercent: 80 },
+  { number: "99%", label: "Taxa de Sucesso", description: "Projetos entregues dentro do prazo", ringPercent: 99 },
+  { number: "24/7", label: "Suporte Disponível", description: "Atendimento quando você precisar", ringPercent: 100 }
 ];
 
 export default function StatsSection() {
@@ -30,17 +30,13 @@ export default function StatsSection() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
-              className="text-center p-8 glass-effect rounded-3xl hover:border-blue-500/40 transition-all duration-300"
             >
-              <div className="text-5xl md:text-6xl font-bold gradient-text mb-4">
-                <CountUp value={stat.number} />
-              </div>
-              <div className="text-xl font-semibold text-white mb-2">
-                {stat.label}
-              </div>
-              <div className="text-sm text-gray-400">
-                {stat.description}
-              </div>
+              <StatRing
+                value={stat.number}
+                label={stat.label}
+                description={stat.description}
+                ringPercent={stat.ringPercent}
+              />
             </motion.div>
           ))}
         </div>

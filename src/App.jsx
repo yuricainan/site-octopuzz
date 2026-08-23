@@ -11,6 +11,7 @@ import Services from '@/pages/Services';
 import Cases from '@/pages/Cases';
 import Blog from '@/pages/Blog';
 import CaseDetail from '@/pages/CaseDetail';
+import Privacidade from '@/pages/Privacidade';
 
 const LayoutWrapper = ({ children, currentPageName }) => (
   <Layout currentPageName={currentPageName}>{children}</Layout>
@@ -29,6 +30,7 @@ function App() {
           <Route path="/Cases" element={<LayoutWrapper currentPageName="Cases"><Cases /></LayoutWrapper>} />
           <Route path="/Blog" element={<LayoutWrapper currentPageName="Blog"><Blog /></LayoutWrapper>} />
           <Route path="/CaseDetail" element={<LayoutWrapper currentPageName="CaseDetail"><CaseDetail /></LayoutWrapper>} />
+          <Route path="/Privacidade" element={<LayoutWrapper currentPageName="Privacidade"><Privacidade /></LayoutWrapper>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>

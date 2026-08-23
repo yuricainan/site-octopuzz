@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { ArrowRight, Play, Zap, Shield, Users } from "lucide-react";
+import AutomationDemo from "./AutomationDemo";
 
 export default function HeroSection() {
   return (
@@ -75,44 +76,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="aspect-square relative">
-              {/* Main Logo */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <img
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/0f94d6b59_logo.png"
-                  alt="Octopuzz Logo"
-                  className="w-80 h-80 object-contain filter drop-shadow-2xl"
-                />
-              </div>
-
-              {/* Floating Elements */}
-              <motion.div
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-1/4 -left-4 glass-effect rounded-2xl p-4"
-              >
-                <div className="text-2xl font-bold gradient-text">150+</div>
-                <div className="text-sm text-gray-400">Projetos</div>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [10, -10, 10] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute top-1/3 -right-4 glass-effect rounded-2xl p-4"
-              >
-                <div className="text-2xl font-bold gradient-text">24/7</div>
-                <div className="text-sm text-gray-400">Suporte</div>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [-5, 15, -5] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                className="absolute bottom-1/4 -left-8 glass-effect rounded-2xl p-4"
-              >
-                <div className="text-2xl font-bold gradient-text">99%</div>
-                <div className="text-sm text-gray-400">Satisfação</div>
-              </motion.div>
-            </div>
+            <AutomationDemo />
           </motion.div>
         </div>
       </div>
