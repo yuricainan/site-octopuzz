@@ -54,6 +54,9 @@ export default function Contact() {
       if (typeof window.gtag === "function") {
         window.gtag("event", "generate_lead", { service: formData.service });
       }
+      if (typeof window.fbq === "function") {
+        window.fbq("track", "Lead");
+      }
       setFormData({
         name: "",
         email: "",
