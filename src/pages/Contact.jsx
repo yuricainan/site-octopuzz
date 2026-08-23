@@ -51,6 +51,9 @@ export default function Contact() {
     try {
       await ContactEntity.create(formData);
       setSubmitted(true);
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "generate_lead", { service: formData.service });
+      }
       setFormData({
         name: "",
         email: "",
