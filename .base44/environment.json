@@ -1,0 +1,13 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "VITE_SUPABASE_ANON_KEY",
+      "description": "Supabase anon/public key for the self-hosted instance at https://supabase.octopuzz.com.br — found in Supabase Studio under Settings > API (anon public key). Required for blog, cases, and contact form to work.",
+      "requiredAtBoot": true,
+      "generatedForDevelopment": true
+    }
+  ]
+}
